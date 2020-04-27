@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="domain.CabType" table="CabType">
+<id name="typeId" column="type_id" type="int">
+<generator class="assigned"></generator>
+</id>
+<property name="seatsNum" column="seates_num" type="int"/>
+<property name="cabSize" column="cab_size"/>
+<property name="cabColor" column="cab_color"/>
+</class>
+</hibernate-mapping>

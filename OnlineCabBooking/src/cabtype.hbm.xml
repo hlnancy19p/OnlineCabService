@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="domain.Cab" table="Cab">
+<id name="cabId" column="cab_id" type="int">
+<generator class="assigned"></generator>
+</id>
+<property name="plateNum" column="plate_num"/>
+<property name="cabInfo" column="cab_info"/>
+<many-to-one name="CabType" class="domain.CabType"
+            column="type_id" not-null="true"/>
+</class>
+</hibernate-mapping>

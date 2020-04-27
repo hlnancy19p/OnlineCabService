@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="domain.User" table="User" discriminator-value="1">
+<id name="userId" column="user_id" type="int">
+<generator class="assigned"></generator>
+</id>
+<discriminator column="role_id" type="int"/>
+<property name="userName" column="user_name"/>
+<property name="fullName" column="full_name"/>
+<property name="passWord" column="pwd"/>
+<property name="userAddr" column="user_addr"/>
+<property name="contactPhone" column="contact_phone"/>
+<property name="companyNumber" column="company_number"/>
+<!-- <property name="roleId" column="role_id" type="int"/> -->
+<!-- <many-to-one name="Role" class="domain.Role"
+            column="role_id" not-null="true"/> -->
+<many-to-one name="Company" class="domain.Company"
+            column="company_id" not-null="true"/>
+<set name="orders" table="Order"
+		inverse="true" lazy="true" fetch="select" order-by="status_id asc , update_time desc">
+    <key>
+        <column name="creater_id" not-null="true" />
+    </key>
+    <one-to-many class="domain.Order" />
+</set>
+
+<subclass name="domain.IndividualUser" discriminator-value="2">
+<set name="personalOrders" table="Order"
+		inverse="true" lazy="true" fetch="select" order-by="status_id asc , update_time desc">
+    <key>
+        <column name="passenger_id" not-null="true" />
+    </key>
+    <one-to-many class="domain.Order" />
+</set>
+<set name="allOrders" table="Order"
+		inverse="true" lazy="true" fetch="select" order-by="status_id asc , update_time desc">
+    <key>
+        <column name="creater" not-null="true" />
+    </key>
+    <one-to-many class="domain.Order" />
+</set>
+</subclass>
+
+<subclass name="domain.BusinessUser" discriminator-value="4">
+</subclass>
+</class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="domain.Order" table="Order">
+<id name="orderId" column="order_id" type="int">
+<generator class="assigned"></generator>
+</id>
+<version name="version" column="version" type="int"/>
+<property name="updateTime" column="update_time"/>
+<property name="pickupAddr" column="pickup_addr"/>
+<property name="pickupTime" column="pickup_time"/>
+<property name="payment" column="payment"/>
+<property name="orderNotes" column="order_notes"/>
+<property name="contactPhone" column="contact_phone"/>
+<property name="numOfPassengers" column="num_of_passengers" type="int"/>
+<many-to-one name="Passenger" class="domain.User"
+            column="passenger_id" not-null="true"/>
+<many-to-one name="Cab" class="domain.Cab"
+            column="cab_id"/>
+<many-to-one name="Status" class="domain.Status"
+            column="status_id" not-null="true"/>
+<many-to-one name="Creater" class="domain.User"
+            column="creater_id" not-null="true"/>
+</class>
+</hibernate-mapping>
